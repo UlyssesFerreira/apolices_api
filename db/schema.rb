@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_21_233308) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_22_231925) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "endorsements", force: :cascade do |t|
+    t.bigint "policy_id"
+    t.date "data_emissao"
+    t.string "tipo"
+    t.decimal "importancia_segurada"
+    t.date "inicio_vigencia"
+    t.date "fim_vigencia"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["policy_id"], name: "index_endorsements_on_policy_id"
+  end
 
   create_table "policies", force: :cascade do |t|
     t.string "numero"
