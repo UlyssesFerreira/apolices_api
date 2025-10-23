@@ -13,6 +13,7 @@ class Policy < ApplicationRecord
     "BAIXADA" => 1
   }
 
+  has_many :endorsements
 
   def inicio_vigencia_within_allowed_range
     return if data_emissao.blank? || inicio_vigencia.blank?
@@ -21,6 +22,15 @@ class Policy < ApplicationRecord
     unless difference_in_days >= -30 && difference_in_days <= 30
       errors.add(:inicio_vigencia, "must be within 30 days before or after data_emissao")
     end
+  end
+
+  def build_endorsement(params)
+    endorsements.new(
+      data_emissao: Date.today,
+      inicio_vigencia: inicio_vigencia,
+      fim_vigencia: params[:fim_vigencia] || fim_vigencia,
+      importancia_segurada: params[:importancia_segurada] || importancia_segurada
+    )
   end
 
 end
