@@ -3,7 +3,7 @@ class Api::PoliciesController < ApplicationController
 
   def index
     policies = Policy.all
-    render json: policies
+    render json: policies, include: :endorsements
   end
 
   def create
@@ -17,7 +17,7 @@ class Api::PoliciesController < ApplicationController
 
   def show
     if @policy
-      render json: @policy
+      render json: @policy, include: :endorsements
     else
       render json: { error: "Policy not found" }, status: :not_found
     end
