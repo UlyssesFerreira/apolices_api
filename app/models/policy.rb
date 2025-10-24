@@ -3,7 +3,7 @@ class Policy < ApplicationRecord
   validates :data_emissao, presence: true
   validates :inicio_vigencia, presence: true
   validates :fim_vigencia, presence: true, comparison: { greater_than: :inicio_vigencia }
-  validates :importancia_segurada, presence: true
+  validates :importancia_segurada, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :lmg, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
   validate :inicio_vigencia_within_allowed_range
@@ -24,13 +24,10 @@ class Policy < ApplicationRecord
     end
   end
 
-  def build_endorsement(params)
-    endorsements.new(
-      data_emissao: Date.today,
-      inicio_vigencia: inicio_vigencia,
-      fim_vigencia: params[:fim_vigencia] || fim_vigencia,
-      importancia_segurada: params[:importancia_segurada] || importancia_segurada
-    )
+  def apply_endorsement(endorsement)
+    self.importancia_segurada = endorsement.importancia_segurada
+    self.fim_vigencia = endorsement.fim_vigencia
+    save!
   end
 
 end

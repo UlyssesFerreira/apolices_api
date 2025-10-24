@@ -7,19 +7,13 @@ class Api::EndorsementsController < ApplicationController
   end
 
   def create
-    endorsement = @policy.build_endorsement(endorsement_params)
+    endorsement_service = EndorsementService.new(@policy, endorsement_params)
+    result = endorsement_service.create
 
-    endorsement_type = EndorsementTypeService.new(@policy, endorsement).set_type
-
-    endorsement.tipo = endorsement_type
-    @policy.importancia_segurada = endorsement.importancia_segurada
-    @policy.fim_vigencia = endorsement.fim_vigencia
-    @policy.lmg = @policy.importancia_segurada
-
-    if endorsement.save && @policy.save
-      render json: endorsement, status: :created
+    if result.success
+      render json: result.endorsement, status: :created
     else
-      render json: { policy_errors: @policy.errors.full_messages, endorsement_errors: endorsement.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: result.errors }, status: :unprocessable_entity
     end
   end
 

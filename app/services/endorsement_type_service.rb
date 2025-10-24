@@ -1,7 +1,10 @@
 class EndorsementTypeService
-  def initialize(policy, endorsement)
+  class NoChangesError < StandardError; end
+
+  def initialize(policy, new_importancia_segurada, new_fim_vigencia)
     @policy = policy
-    @endorsement = endorsement
+    @new_importancia_segurada = new_importancia_segurada
+    @new_fim_vigencia = new_fim_vigencia
   end
 
   def set_type
@@ -10,19 +13,20 @@ class EndorsementTypeService
     return "aumento_is" if importancia_segurada_increased?
     return "reducao_is" if importancia_segurada_decreased?
     return "alteracao_vigencia" if vigencia_changed?
+    raise NoChangesError, "No changes detected"
   end
 
   private
 
   def importancia_segurada_increased?
-    @endorsement.importancia_segurada > @policy.importancia_segurada
+    @new_importancia_segurada > @policy.importancia_segurada
   end
 
   def importancia_segurada_decreased?
-    @endorsement.importancia_segurada < @policy.importancia_segurada
+    @new_importancia_segurada < @policy.importancia_segurada
   end
 
   def vigencia_changed?
-    @endorsement.fim_vigencia != @policy.fim_vigencia
+    @new_fim_vigencia != @policy.fim_vigencia
   end
 end
