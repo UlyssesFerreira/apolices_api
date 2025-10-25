@@ -1,0 +1,235 @@
+{
+	"info": {
+		"_postman_id": "e12185b8-3296-4306-92b5-44ac6422aca1",
+		"name": "apolices_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23183725"
+	},
+	"item": [
+		{
+			"name": "Policies",
+			"item": [
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/policies/{{policy_id}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"policies",
+								"{{policy_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/policies",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"policies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const data = pm.response.json()",
+									"pm.collectionVariables.set(\"policy_id\", data.id)"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"policy\": {\n        \"numero\": \"{{$randomInt}}\",\n        \"data_emissao\": \"2025-10-21\",\n        \"inicio_vigencia\": \"2025-10-21\",\n        \"fim_vigencia\": \"2025-12-01\",\n        \"importancia_segurada\": 5000,\n        \"lmg\": 5000\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/policies",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"policies"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Endorsements",
+			"item": [
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const data = pm.response.json()",
+									"pm.collectionVariables.set(\"endorsement_id\", data.id)",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"endorsement\": {\n        \"importancia_segurada\": 7000,\n        \"fim_vigencia\": \"2026-01-01\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/policies/{{policy_id}}/endorsements",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"policies",
+								"{{policy_id}}",
+								"endorsements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/policies/{{policy_id}}/endorsements/{{endorsement_id}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"policies",
+								"{{policy_id}}",
+								"endorsements",
+								"{{endorsement_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/policies/{{policy_id}}/endorsements",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"policies",
+								"{{policy_id}}",
+								"endorsements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/policies/{{policy_id}}/endorsements/cancel",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"policies",
+								"{{policy_id}}",
+								"endorsements",
+								"cancel"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": ""
+		},
+		{
+			"key": "policy_id",
+			"value": ""
+		},
+		{
+			"key": "endorsement_id",
+			"value": ""
+		}
+	]
+}
