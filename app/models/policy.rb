@@ -27,6 +27,7 @@ class Policy < ApplicationRecord
   def apply_endorsement(endorsement)
     self.importancia_segurada = endorsement.importancia_segurada
     self.fim_vigencia = endorsement.fim_vigencia
+    self.lmg = endorsement.importancia_segurada
     save!
   end
 

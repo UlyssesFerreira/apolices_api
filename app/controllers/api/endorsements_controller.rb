@@ -26,6 +26,17 @@ class Api::EndorsementsController < ApplicationController
     end
   end
 
+  def cancel
+    cancellation_service = EndorsementCancellationService.new(@policy)
+    result = cancellation_service.cancel
+
+    if result.success
+      render json: result.endorsement, status: :ok
+    else
+      render json: { errors: result.errors }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def endorsement_params

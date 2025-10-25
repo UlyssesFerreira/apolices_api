@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_22_231925) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_24_222129) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -23,6 +23,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_22_231925) do
     t.date "fim_vigencia"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "cancelled_endorsement_id"
+    t.index ["cancelled_endorsement_id"], name: "index_endorsements_on_cancelled_endorsement_id"
     t.index ["policy_id"], name: "index_endorsements_on_policy_id"
   end
 
@@ -37,4 +39,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_22_231925) do
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
   end
+
+  add_foreign_key "endorsements", "endorsements", column: "cancelled_endorsement_id"
 end

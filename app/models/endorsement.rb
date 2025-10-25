@@ -1,14 +1,5 @@
 class Endorsement < ApplicationRecord
-  after_create :sync_policy_lmg, if: :importancia_segurada_changed?
   belongs_to :policy
-
-  private
-
-  def sync_policy_lmg
-    policy.update(lmg: importancia_segurada)
-  end
-
-  def importancia_segurada_changed?
-    self.importancia_segurada != policy.importancia_segurada
-  end
+  belongs_to :cancelled_endorsement, class_name: "Endorsement", optional: true
+  has_one :cancellation_endorsement, class_name: "Endorsement", foreign_key: "cancelled_endorsement_id"
 end
