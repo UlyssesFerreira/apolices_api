@@ -9,9 +9,11 @@ class Policy < ApplicationRecord
   validate :inicio_vigencia_within_allowed_range
 
   enum :status, {
-    "ATIVA" => 0,
-    "BAIXADA" => 1
+    "ativa" => 0,
+    "baixada" => 1
   }
+
+  before_create :set_original_values
 
   has_many :endorsements
 
@@ -31,4 +33,8 @@ class Policy < ApplicationRecord
     save!
   end
 
+  def set_original_values
+    self.importancia_segurada_original = self.importancia_segurada
+    self.fim_vigencia_original = self.fim_vigencia
+  end
 end
