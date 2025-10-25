@@ -56,13 +56,29 @@ class EndorsementCancellationService
 
   def build_cancellation_endorsement(endorsement_to_cancel)
     endorsement_to_restore = find_endorsement_to_restore(endorsement_to_cancel)
-    @policy.endorsements.new(
-      data_emissao: Date.today,
-      inicio_vigencia: endorsement_to_restore.inicio_vigencia,
-      fim_vigencia: endorsement_to_restore.fim_vigencia,
-      importancia_segurada: endorsement_to_restore.importancia_segurada,
-      tipo: "cancelamento",
-      cancelled_endorsement: endorsement_to_cancel
-    )
+    if endorsement_to_restore.nil?
+      update_policy_to_baixada
+      @policy.endorsements.new(
+        data_emissao: Date.today,
+        inicio_vigencia: @policy.inicio_vigencia,
+        fim_vigencia: @policy.fim_vigencia_original,
+        importancia_segurada: @policy.importancia_segurada_original,
+        tipo: "cancelamento",
+        cancelled_endorsement: endorsement_to_cancel
+      )
+    else
+      @policy.endorsements.new(
+        data_emissao: Date.today,
+        inicio_vigencia: endorsement_to_restore.inicio_vigencia,
+        fim_vigencia: endorsement_to_restore.fim_vigencia,
+        importancia_segurada: endorsement_to_restore.importancia_segurada,
+        tipo: "cancelamento",
+        cancelled_endorsement: endorsement_to_cancel
+      )
+    end
+  end
+
+  def update_policy_to_baixada
+    @policy.baixada!
   end
 end

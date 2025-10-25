@@ -1,5 +1,6 @@
 class Api::EndorsementsController < ApplicationController
   before_action :set_policy
+  before_action :policy_is_active?, only: [ :create, :cancel ]
 
   def index
     endorsements = @policy.endorsements
@@ -48,5 +49,10 @@ class Api::EndorsementsController < ApplicationController
 
   def set_policy
     @policy = Policy.find_by(id: params[:policy_id])
+    render json: { error: "Policy not found" }, status: :not_found if @policy.nil?
+  end
+
+  def policy_is_active?
+    render json: { error: "This policy is not active" }, status: :unprocessable_entity if @policy.baixada?
   end
 end
