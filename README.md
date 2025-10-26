@@ -14,7 +14,7 @@ cd apolices_api
 
 ## 2 - Criar e subir os containers
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
 ### Isso vai subir os containers com:
 - Aplicação Rails na porta 3000
