@@ -32,7 +32,7 @@ class Api::EndorsementsController < ApplicationController
     result = cancellation_service.cancel
 
     if result.success
-      render json: result.endorsement, status: :ok
+      render json: result.endorsement, status: :created
     else
       render json: { errors: result.errors }, status: :unprocessable_entity
     end
