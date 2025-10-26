@@ -7,6 +7,8 @@ Projeto desenvolvido para simular o gerenciamento de apólices de seguro e seus 
 
 ```bash
 git clone https://github.com/UlyssesFerreira/apolices_api.git
+```
+```bash
 cd apolices_api
 ```
 
