@@ -25,5 +25,18 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  test:
+    build: .
+    command: bundle exec rspec
+    volumes:
+      - .:/myapp
+    environment:
+      DATABASE_HOST: db
+      POSTGRES_USER: app_user
+      POSTGRES_PASSWORD: app_password
+      RAILS_ENV: test
+    depends_on:
+      - db
+
 volumes:
   postgres_data:
