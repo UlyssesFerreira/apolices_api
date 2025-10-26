@@ -18,7 +18,7 @@ docker compose up --build
 ```
 ### Isso vai subir os containers com:
 - Aplicação Rails na porta 3000
-- Banco de dados PostgreSQL na porta 5432
+- Banco de dados PostgreSQL na porta 5433
 
 ## Endpoints
 
@@ -78,4 +78,14 @@ GET /api/:policy_id/endorsements
 ### Cancelar o último endosso válido de uma apólice
 ```http
 POST /api/:policy_id/endorsements/cancel
+```
+
+## Executar os testes
+### Após a criação dos containers, rode o comando:
+```bash
+docker compose run --rm test
+```
+### ou para rodar localmente:
+```
+bundle exec rspec
 ```
