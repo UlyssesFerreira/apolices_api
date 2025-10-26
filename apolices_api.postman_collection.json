@@ -221,7 +221,7 @@
 	"variable": [
 		{
 			"key": "BASE_URL",
-			"value": ""
+			"value": "localhost:3000/api"
 		},
 		{
 			"key": "policy_id",
