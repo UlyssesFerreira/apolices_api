@@ -10,41 +10,6 @@
 			"name": "Policies",
 			"item": [
 				{
-					"name": "Show",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{BASE_URL}}/policies/{{policy_id}}",
-							"host": [
-								"{{BASE_URL}}"
-							],
-							"path": [
-								"policies",
-								"{{policy_id}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Index",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{BASE_URL}}/policies",
-							"host": [
-								"{{BASE_URL}}"
-							],
-							"path": [
-								"policies"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Create",
 					"event": [
 						{
@@ -72,6 +37,41 @@
 								}
 							}
 						},
+						"url": {
+							"raw": "{{BASE_URL}}/policies",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"policies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/policies/{{policy_id}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"policies",
+								"{{policy_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
 						"url": {
 							"raw": "{{BASE_URL}}/policies",
 							"host": [
@@ -153,25 +153,6 @@
 					"response": []
 				},
 				{
-					"name": "Index",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{BASE_URL}}/policies/{{policy_id}}/endorsements",
-							"host": [
-								"{{BASE_URL}}"
-							],
-							"path": [
-								"policies",
-								"{{policy_id}}",
-								"endorsements"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Cancel",
 					"request": {
 						"method": "POST",
@@ -186,6 +167,25 @@
 								"{{policy_id}}",
 								"endorsements",
 								"cancel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/policies/{{policy_id}}/endorsements",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"policies",
+								"{{policy_id}}",
+								"endorsements"
 							]
 						}
 					},
