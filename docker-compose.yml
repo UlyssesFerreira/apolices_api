@@ -37,6 +37,7 @@ services:
       RAILS_ENV: test
     depends_on:
       - db
+      - app
 
 volumes:
   postgres_data:
