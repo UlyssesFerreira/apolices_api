@@ -20,6 +20,12 @@ docker compose up --build
 - Aplicação Rails na porta 3000
 - Banco de dados PostgreSQL na porta 5433
 
+## Executar os testes
+### Após a criação dos containers, rode o comando:
+```bash
+docker compose run --rm test
+```
+
 ## Endpoints
 
 ### Apólices
@@ -80,12 +86,25 @@ GET /api/:policy_id/endorsements
 POST /api/:policy_id/endorsements/cancel
 ```
 
-## Executar os testes
-### Após a criação dos containers, rode o comando:
+## Para rodar o projeto local (sem Docker)
+## 1 - Configure as variáveis no `.env`
+```
+POSTGRES_USER
+POSTGRES_PASSWORD
+```
+## 2 - Instale as dependencias
 ```bash
-docker compose run --rm test
+bundle install
 ```
-### ou para rodar localmente:
+## 3 - Configure o banco de dados
+```bash
+rails db:prepare
 ```
+### 4 - Iniciar servidor
+```bash
+rails server
+```
+## Executar os testes
+```bash
 bundle exec rspec
 ```
